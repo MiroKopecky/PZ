@@ -3,11 +3,11 @@ const canvas = document.querySelector("canvas");
 
 const resize = () => {
   canvas.width = window.innerWidth-2;
-  canvas.height = window.innerHeight-2;
+  canvas.height = window.innerHeight-22;
 }
 
-resize()
-window.addEventListener('resize', resize)
+resize();
+window.addEventListener('resize', resize);
 
 // drawing
 window.addEventListener('load', function () {
@@ -48,9 +48,9 @@ window.addEventListener('load', function () {
       if (startLine[0] > leafCoordinates[0] && startLine[1] > leafCoordinates[1] && startLine[0] < leafCoordinates[0] + leafCoordinates[2] && startLine[1] < leafCoordinates[1] + leafCoordinates[3]) {
         leaf = 1;
       }
-      // else if (endLine[0] > leafCoordinates[0] && endLine[1] > leafCoordinates[1] && endLine[0] < leafCoordinates[0] + leafCoordinates[2] && endLine[1] < leafCoordinates[1] + leafCoordinates[3]) {
-      //   leaf = 2;
-      // }
+      else if (endLine[0] > leafCoordinates[0] && endLine[1] > leafCoordinates[1] && endLine[0] < leafCoordinates[0] + leafCoordinates[2] && endLine[1] < leafCoordinates[1] + leafCoordinates[3]) {
+        leaf = 2;
+      }
       else {
         startLineTransparent = true;
         endLineTransparent = true;
@@ -61,23 +61,29 @@ window.addEventListener('load', function () {
         console.log(ladybug2Coordinates[0], ladybug2Coordinates[1], ladybug2Coordinates[0] + ladybug2Coordinates[2], ladybug2Coordinates[1] + ladybug2Coordinates[3]);
         console.log(endLine[0], endLine[1]);
         if (
-          // !(endLine[0] > ladybug1Coordinates[0] && endLine[1] > ladybug1Coordinates[1] && endLine[0] < ladybug1Coordinates[0] + ladybug1Coordinates[2] && endLine[1] < ladybug1Coordinates[1] + ladybug1Coordinates[3]) ||
-          ((endLine[0] > ladybug2Coordinates[0]) && (endLine[1] > ladybug2Coordinates[1]) && (endLine[0] < ladybug2Coordinates[0] + ladybug2Coordinates[2]) && (endLine[1] < ladybug2Coordinates[1] + ladybug2Coordinates[3]))        
+          (endLine[0] > ladybug1Coordinates[0] && endLine[1] > ladybug1Coordinates[1] && endLine[0] < ladybug1Coordinates[0] + ladybug1Coordinates[2] && endLine[1] < ladybug1Coordinates[1] + ladybug1Coordinates[3]) ||
+          (endLine[0] > ladybug2Coordinates[0] && endLine[1] > ladybug2Coordinates[1] && endLine[0] < ladybug2Coordinates[0] + ladybug2Coordinates[2] && endLine[1] < ladybug2Coordinates[1] + ladybug2Coordinates[3])        
         ) {
           console.log("inside box")
         }
+        else {
+          endLineTransparent = true;
+        }
       }
 
-      // if (leaf == 2) {
-      //   console.log(startLine[0] > ladybug2Coordinates[0] && startLine[1] > ladybug2Coordinates[1] && startLine[0] < ladybug2Coordinates[0] + ladybug2Coordinates[2] && startLine[1] < ladybug2Coordinates[1] + ladybug2Coordinates[3]);
-      //   console.log(ladybug2Coordinates[0], ladybug2Coordinates[1], ladybug2Coordinates[0] + ladybug2Coordinates[2], ladybug2Coordinates[1] + ladybug2Coordinates[3]);
-      //   if (
-      //     !(startLine[0] > ladybug1Coordinates[0] && startLine[1] > ladybug1Coordinates[1] && startLine[0] < ladybug1Coordinates[0] + ladybug1Coordinates[2] && startLine[1] < ladybug1Coordinates[1] + ladybug1Coordinates[3]) ||
-      //     (startLine[0] > ladybug2Coordinates[0] && startLine[1] > ladybug2Coordinates[1] && startLine[0] < ladybug2Coordinates[0] + ladybug2Coordinates[2] && startLine[1] < ladybug2Coordinates[1] + ladybug2Coordinates[3])        
-      //   ) {
-      //     endLineTransparent = true;
-      //   }
-      // }
+      if (leaf == 2) {
+        console.log(startLine[0] > ladybug2Coordinates[0] && startLine[1] > ladybug2Coordinates[1] && startLine[0] < ladybug2Coordinates[0] + ladybug2Coordinates[2] && startLine[1] < ladybug2Coordinates[1] + ladybug2Coordinates[3]);
+        console.log(ladybug2Coordinates[0], ladybug2Coordinates[1], ladybug2Coordinates[0] + ladybug2Coordinates[2], ladybug2Coordinates[1] + ladybug2Coordinates[3]);
+        if (
+          (startLine[0] > ladybug1Coordinates[0] && startLine[1] > ladybug1Coordinates[1] && startLine[0] < ladybug1Coordinates[0] + ladybug1Coordinates[2] && startLine[1] < ladybug1Coordinates[1] + ladybug1Coordinates[3]) ||
+          (startLine[0] > ladybug2Coordinates[0] && startLine[1] > ladybug2Coordinates[1] && startLine[0] < ladybug2Coordinates[0] + ladybug2Coordinates[2] && startLine[1] < ladybug2Coordinates[1] + ladybug2Coordinates[3])        
+        ) {
+          console.log("inside box")
+        }
+        else {
+          endLineTransparent = true;
+        }
+      }
 
       console.log(leaf);
     }
@@ -143,8 +149,8 @@ window.addEventListener('load', function () {
 
   // print images
   var demoCoordinates = [10, 10, canvas.width*0.2, canvas.height*0.2];
-  var ladybug1Coordinates = [canvas.width*0.1, canvas.height*0.7, canvas.width*0.2, canvas.height*0.2];
-  var ladybug2Coordinates = [canvas.width*0.7, canvas.height*0.2, canvas.width*0.2, canvas.height*0.2];
+  var ladybug1Coordinates = [canvas.width*0.1, canvas.height*0.7, canvas.width*0.17, canvas.height*0.2];
+  var ladybug2Coordinates = [canvas.width*0.7, canvas.height*0.2, canvas.width*0.17, canvas.height*0.2];
   var leafCoordinates = [canvas.width*0.4, canvas.height*0.4, canvas.width*0.3, canvas.height*0.3];
 
   // demo img
@@ -179,3 +185,7 @@ window.addEventListener('load', function () {
   leaf.src = 'assets/pl1/leaf.png';
 
 }, false); // end window.onLoad
+
+document.addEventListener("orientationchange", function(event){
+  location.reload();
+});
