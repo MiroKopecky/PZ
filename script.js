@@ -187,5 +187,5 @@ window.addEventListener('load', function () {
 }, false); // end window.onLoad
 
 document.addEventListener("orientationchange", function(event){
-  location.reload();
+  window.location.reload();
 });
