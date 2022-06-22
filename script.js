@@ -207,14 +207,26 @@ window.addEventListener('load', function () {
 
   // images size
   var demoCoordinates = [10, 10, canvas.width*0.17, canvas.height*0.17];
-  var ladybug1Coordinates = [canvas.width*0.1, canvas.height*0.4, canvas.width*0.15, canvas.height*0.16];
-  var ladybug2Coordinates = [canvas.width*0.7, canvas.height*0.2, canvas.width*0.15, canvas.height*0.16];
-  var ladybug3Coordinates = [canvas.width*0.4, canvas.height*0.1, canvas.width*0.15, canvas.height*0.16];
-  var ladybug4Coordinates = [canvas.width*0.8, canvas.height*0.7, canvas.width*0.14, canvas.height*0.16];
-  var ladybug5Coordinates = [canvas.width*0.5, canvas.height*0.8, canvas.width*0.11, canvas.height*0.18];
-  var ladybug6Coordinates = [canvas.width*0.2, canvas.height*0.7, canvas.width*0.11, canvas.height*0.18];
-  var svabikCoordinates = [canvas.width*0.85, canvas.height*0.45, canvas.width*0.1, canvas.height*0.17];
-  var leafCoordinates = [canvas.width*0.4, canvas.height*0.4, canvas.width*0.23, canvas.height*0.23];
+  var ladybug1Coordinates = [canvas.width*0.1, canvas.height*0.4, canvas.width*0.13, canvas.height*0.16];
+  var ladybug2Coordinates = [canvas.width*0.7, canvas.height*0.2, canvas.width*0.13, canvas.height*0.16];
+  var ladybug3Coordinates = [canvas.width*0.4, canvas.height*0.1, canvas.width*0.13, canvas.height*0.16];
+  var ladybug4Coordinates = [canvas.width*0.8, canvas.height*0.7, canvas.width*0.12, canvas.height*0.16];
+  var ladybug5Coordinates = [canvas.width*0.5, canvas.height*0.8, canvas.width*0.09, canvas.height*0.18];
+  var ladybug6Coordinates = [canvas.width*0.2, canvas.height*0.7, canvas.width*0.09, canvas.height*0.18];
+  var svabikCoordinates = [canvas.width*0.85, canvas.height*0.45, canvas.width*0.08, canvas.height*0.17];
+  var leafCoordinates = [canvas.width*0.4, canvas.height*0.4, canvas.width*0.21, canvas.height*0.23];
+
+  if (canvas.height * 1.85 < canvas.width) {
+    demoCoordinates = [10, 10, canvas.width*0.12, canvas.height*0.17];
+    ladybug1Coordinates = [canvas.width*0.1, canvas.height*0.4, canvas.width*0.07, canvas.height*0.16];
+    ladybug2Coordinates = [canvas.width*0.7, canvas.height*0.2, canvas.width*0.07, canvas.height*0.16];
+    ladybug3Coordinates = [canvas.width*0.4, canvas.height*0.1, canvas.width*0.07, canvas.height*0.16];
+    ladybug4Coordinates = [canvas.width*0.8, canvas.height*0.7, canvas.width*0.05, canvas.height*0.16];
+    ladybug5Coordinates = [canvas.width*0.5, canvas.height*0.8, canvas.width*0.04, canvas.height*0.18];
+    ladybug6Coordinates = [canvas.width*0.2, canvas.height*0.7, canvas.width*0.04, canvas.height*0.18];
+    svabikCoordinates = [canvas.width*0.85, canvas.height*0.45, canvas.width*0.04, canvas.height*0.17];
+    leafCoordinates = [canvas.width*0.4, canvas.height*0.4, canvas.width*0.15, canvas.height*0.23];
+  }
 
   // demo img
   var demo = new Image();
