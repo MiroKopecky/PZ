@@ -26,24 +26,22 @@ window.addEventListener('load', function () {
     g = context.getImageData(x, y, 1, 1).data[1]; //green
     b = context.getImageData(x, y, 1, 1).data[2]; //blue
     a = context.getImageData(x, y, 1, 1).data[3]; //transparent
-    var bool = a === 0; //check if transparent pixel
-    //check if pixel is red
-    // if((r > 0 && g <= 50 && b <= 50)) {       
-    //     bool = true;
-    // }
-    //console.log(r,g,b,a,context.getImageData(x, y, 1, 1).data[3] === 0); // 4th byte is alpha
-    newLine.push([x,y,bool])
+    bool = a < 250; //check if transparent pixel
+    //check if pixel is white
+    if (r == 255 && g == 255 && b == 255) {
+      bool = false;
+    }
+    console.log(r,g,b,a,bool)
+    return bool;
   }
 
   function checkLine(line) {
     var startLine = line[0];
     var endLine = line[line.length - 1];
-    var startLineTransparent = startLine[2];
-    var endLineTransparent = endLine[2];
+    var startLineTransparent = isTransparent(startLine[0], startLine[1]);
+    var endLineTransparent = isTransparent(endLine[0], endLine[1]);
 
     if (startLineTransparent == false && endLineTransparent == false) {
-      //console.log(line[0], line[line.length - 1]);
-      //console.log(leafCoordinates);
       leaf = 0;
       if (startLine[0] > leafCoordinates[0] && startLine[1] > leafCoordinates[1] && startLine[0] < leafCoordinates[0] + leafCoordinates[2] && startLine[1] < leafCoordinates[1] + leafCoordinates[3]) {
         leaf = 1;
@@ -57,12 +55,13 @@ window.addEventListener('load', function () {
       }
 
       if (leaf == 1) {
-        console.log(endLine[0] > ladybug2Coordinates[0] && endLine[1] > ladybug2Coordinates[1] && endLine[0] < ladybug2Coordinates[0] + ladybug2Coordinates[2] && endLine[1] < ladybug2Coordinates[1] + ladybug2Coordinates[3]);
-        console.log(ladybug2Coordinates[0], ladybug2Coordinates[1], ladybug2Coordinates[0] + ladybug2Coordinates[2], ladybug2Coordinates[1] + ladybug2Coordinates[3]);
-        console.log(endLine[0], endLine[1]);
         if (
           (endLine[0] > ladybug1Coordinates[0] && endLine[1] > ladybug1Coordinates[1] && endLine[0] < ladybug1Coordinates[0] + ladybug1Coordinates[2] && endLine[1] < ladybug1Coordinates[1] + ladybug1Coordinates[3]) ||
-          (endLine[0] > ladybug2Coordinates[0] && endLine[1] > ladybug2Coordinates[1] && endLine[0] < ladybug2Coordinates[0] + ladybug2Coordinates[2] && endLine[1] < ladybug2Coordinates[1] + ladybug2Coordinates[3])        
+          (endLine[0] > ladybug2Coordinates[0] && endLine[1] > ladybug2Coordinates[1] && endLine[0] < ladybug2Coordinates[0] + ladybug2Coordinates[2] && endLine[1] < ladybug2Coordinates[1] + ladybug2Coordinates[3]) ||
+          (endLine[0] > ladybug3Coordinates[0] && endLine[1] > ladybug3Coordinates[1] && endLine[0] < ladybug3Coordinates[0] + ladybug3Coordinates[2] && endLine[1] < ladybug3Coordinates[1] + ladybug3Coordinates[3]) ||
+          (endLine[0] > ladybug4Coordinates[0] && endLine[1] > ladybug4Coordinates[1] && endLine[0] < ladybug4Coordinates[0] + ladybug4Coordinates[2] && endLine[1] < ladybug4Coordinates[1] + ladybug4Coordinates[3]) ||
+          (endLine[0] > ladybug5Coordinates[0] && endLine[1] > ladybug5Coordinates[1] && endLine[0] < ladybug5Coordinates[0] + ladybug5Coordinates[2] && endLine[1] < ladybug5Coordinates[1] + ladybug5Coordinates[3]) ||
+          (endLine[0] > ladybug6Coordinates[0] && endLine[1] > ladybug6Coordinates[1] && endLine[0] < ladybug6Coordinates[0] + ladybug6Coordinates[2] && endLine[1] < ladybug6Coordinates[1] + ladybug6Coordinates[3])
         ) {
           console.log("inside box")
         }
@@ -72,11 +71,13 @@ window.addEventListener('load', function () {
       }
 
       if (leaf == 2) {
-        console.log(startLine[0] > ladybug2Coordinates[0] && startLine[1] > ladybug2Coordinates[1] && startLine[0] < ladybug2Coordinates[0] + ladybug2Coordinates[2] && startLine[1] < ladybug2Coordinates[1] + ladybug2Coordinates[3]);
-        console.log(ladybug2Coordinates[0], ladybug2Coordinates[1], ladybug2Coordinates[0] + ladybug2Coordinates[2], ladybug2Coordinates[1] + ladybug2Coordinates[3]);
         if (
           (startLine[0] > ladybug1Coordinates[0] && startLine[1] > ladybug1Coordinates[1] && startLine[0] < ladybug1Coordinates[0] + ladybug1Coordinates[2] && startLine[1] < ladybug1Coordinates[1] + ladybug1Coordinates[3]) ||
-          (startLine[0] > ladybug2Coordinates[0] && startLine[1] > ladybug2Coordinates[1] && startLine[0] < ladybug2Coordinates[0] + ladybug2Coordinates[2] && startLine[1] < ladybug2Coordinates[1] + ladybug2Coordinates[3])        
+          (startLine[0] > ladybug2Coordinates[0] && startLine[1] > ladybug2Coordinates[1] && startLine[0] < ladybug2Coordinates[0] + ladybug2Coordinates[2] && startLine[1] < ladybug2Coordinates[1] + ladybug2Coordinates[3]) ||
+          (startLine[0] > ladybug3Coordinates[0] && startLine[1] > ladybug3Coordinates[1] && startLine[0] < ladybug3Coordinates[0] + ladybug3Coordinates[2] && startLine[1] < ladybug3Coordinates[1] + ladybug3Coordinates[3]) ||
+          (startLine[0] > ladybug4Coordinates[0] && startLine[1] > ladybug4Coordinates[1] && startLine[0] < ladybug4Coordinates[0] + ladybug4Coordinates[2] && startLine[1] < ladybug4Coordinates[1] + ladybug4Coordinates[3]) ||
+          (startLine[0] > ladybug5Coordinates[0] && startLine[1] > ladybug5Coordinates[1] && startLine[0] < ladybug5Coordinates[0] + ladybug5Coordinates[2] && startLine[1] < ladybug5Coordinates[1] + ladybug5Coordinates[3]) ||
+          (startLine[0] > ladybug6Coordinates[0] && startLine[1] > ladybug6Coordinates[1] && startLine[0] < ladybug6Coordinates[0] + ladybug6Coordinates[2] && startLine[1] < ladybug6Coordinates[1] + ladybug6Coordinates[3])
         ) {
           console.log("inside box")
         }
@@ -103,18 +104,23 @@ window.addEventListener('load', function () {
   function drawstart(event) {
     context.beginPath();
     context.moveTo(event.pageX - canvas.offsetLeft, event.pageY - canvas.offsetTop);
+    r = context.getImageData(event.pageX - canvas.offsetLeft, event.pageY - canvas.offsetTop, 1, 1).data[0]; //red
+    g = context.getImageData(event.pageX - canvas.offsetLeft, event.pageY - canvas.offsetTop, 1, 1).data[1]; //green
+    b = context.getImageData(event.pageX - canvas.offsetLeft, event.pageY - canvas.offsetTop, 1, 1).data[2]; //blue
+    a = context.getImageData(event.pageX - canvas.offsetLeft, event.pageY - canvas.offsetTop, 1, 1).data[3]; //transparent
+    console.log("start",r,g,b,a)
     isIdle = false;
   }
   function drawmove(event) {
     if (isIdle) return;
-    // r = context.getImageData(event.pageX - canvas.offsetLeft, event.pageY - canvas.offsetTop, 1, 1).data[0]; //red
-    // g = context.getImageData(event.pageX - canvas.offsetLeft, event.pageY - canvas.offsetTop, 1, 1).data[1]; //green
-    // b = context.getImageData(event.pageX - canvas.offsetLeft, event.pageY - canvas.offsetTop, 1, 1).data[2]; //blue
-    // a = context.getImageData(event.pageX - canvas.offsetLeft, event.pageY - canvas.offsetTop, 1, 1).data[3]; //transparent
-    // console.log(r,g,b,a)
-    // newLineCol.push([r,g,b,a])
+    r = context.getImageData(event.pageX - canvas.offsetLeft, event.pageY - canvas.offsetTop, 1, 1).data[0]; //red
+    g = context.getImageData(event.pageX - canvas.offsetLeft, event.pageY - canvas.offsetTop, 1, 1).data[1]; //green
+    b = context.getImageData(event.pageX - canvas.offsetLeft, event.pageY - canvas.offsetTop, 1, 1).data[2]; //blue
+    a = context.getImageData(event.pageX - canvas.offsetLeft, event.pageY - canvas.offsetTop, 1, 1).data[3]; //transparent
+    console.log("move",r,g,b,a)
+    newLineCol.push([r,g,b,a])
     context.lineTo(event.pageX - canvas.offsetLeft, event.pageY - canvas.offsetTop);
-    isTransparent(event.pageX - canvas.offsetLeft, event.pageY - canvas.offsetTop);
+    newLine.push([event.pageX - canvas.offsetLeft, event.pageY - canvas.offsetTop]);
     context.stroke();
   }
   function drawend(event) {
@@ -147,11 +153,16 @@ window.addEventListener('load', function () {
   
 
 
-  // print images
-  var demoCoordinates = [10, 10, canvas.width*0.2, canvas.height*0.2];
-  var ladybug1Coordinates = [canvas.width*0.1, canvas.height*0.7, canvas.width*0.17, canvas.height*0.2];
-  var ladybug2Coordinates = [canvas.width*0.7, canvas.height*0.2, canvas.width*0.17, canvas.height*0.2];
-  var leafCoordinates = [canvas.width*0.4, canvas.height*0.4, canvas.width*0.3, canvas.height*0.3];
+  // images size
+  var demoCoordinates = [10, 10, canvas.width*0.17, canvas.height*0.17];
+  var ladybug1Coordinates = [canvas.width*0.1, canvas.height*0.4, canvas.width*0.15, canvas.height*0.16];
+  var ladybug2Coordinates = [canvas.width*0.7, canvas.height*0.2, canvas.width*0.15, canvas.height*0.16];
+  var ladybug3Coordinates = [canvas.width*0.4, canvas.height*0.1, canvas.width*0.15, canvas.height*0.16];
+  var ladybug4Coordinates = [canvas.width*0.8, canvas.height*0.7, canvas.width*0.15, canvas.height*0.16];
+  var ladybug5Coordinates = [canvas.width*0.5, canvas.height*0.8, canvas.width*0.12, canvas.height*0.18];
+  var ladybug6Coordinates = [canvas.width*0.2, canvas.height*0.7, canvas.width*0.12, canvas.height*0.18];
+  var svabikCoordinates = [canvas.width*0.85, canvas.height*0.45, canvas.width*0.1, canvas.height*0.17];
+  var leafCoordinates = [canvas.width*0.4, canvas.height*0.4, canvas.width*0.23, canvas.height*0.23];
 
   // demo img
   var demo = new Image();
@@ -164,7 +175,6 @@ window.addEventListener('load', function () {
   var ladybug1 = new Image();
   ladybug1.onload = function() {
     context.drawImage(ladybug1, ladybug1Coordinates[0], ladybug1Coordinates[1], ladybug1Coordinates[2], ladybug1Coordinates[3]);
-    context.strokeRect(ladybug1Coordinates[0], ladybug1Coordinates[1], ladybug1Coordinates[2], ladybug1Coordinates[3]);
   };
   ladybug1.src = 'assets/pl1/ladybug1.png';
   
@@ -172,15 +182,48 @@ window.addEventListener('load', function () {
   var ladybug2 = new Image();
   ladybug2.onload = function() {
     context.drawImage(ladybug2, ladybug2Coordinates[0], ladybug2Coordinates[1], ladybug2Coordinates[2], ladybug2Coordinates[3]);
-    context.strokeRect(ladybug2Coordinates[0], ladybug2Coordinates[1], ladybug2Coordinates[2], ladybug2Coordinates[3]);
   };
   ladybug2.src = 'assets/pl1/ladybug2.png';
+
+  // ladybug3
+  var ladybug3 = new Image();
+  ladybug3.onload = function() {
+    context.drawImage(ladybug3, ladybug3Coordinates[0], ladybug3Coordinates[1], ladybug3Coordinates[2], ladybug3Coordinates[3]);
+  };
+  ladybug3.src = 'assets/pl1/ladybug3.png';
+  
+  // ladybug4
+  var ladybug4 = new Image();
+  ladybug4.onload = function() {
+    context.drawImage(ladybug4, ladybug4Coordinates[0], ladybug4Coordinates[1], ladybug4Coordinates[2], ladybug4Coordinates[3]);
+  };
+  ladybug4.src = 'assets/pl1/ladybug4.png';
+
+  // ladybug5
+  var ladybug5 = new Image();
+  ladybug5.onload = function() {
+    context.drawImage(ladybug5, ladybug5Coordinates[0], ladybug5Coordinates[1], ladybug5Coordinates[2], ladybug5Coordinates[3]);
+  };
+  ladybug5.src = 'assets/pl1/ladybug5.png';
+  
+  // ladybug6
+  var ladybug6 = new Image();
+  ladybug6.onload = function() {
+    context.drawImage(ladybug6, ladybug6Coordinates[0], ladybug6Coordinates[1], ladybug6Coordinates[2], ladybug6Coordinates[3]);
+  };
+  ladybug6.src = 'assets/pl1/ladybug6.png';
+
+  // svabik
+  var svabik = new Image();
+  svabik.onload = function() {
+    context.drawImage(svabik, svabikCoordinates[0], svabikCoordinates[1], svabikCoordinates[2], svabikCoordinates[3]);
+  };
+  svabik.src = 'assets/pl1/svabik.png';
   
   // leaf
   var leaf = new Image();
   leaf.onload = function() {
     context.drawImage(leaf, leafCoordinates[0], leafCoordinates[1], leafCoordinates[2], leafCoordinates[3]);
-    context.strokeRect(leafCoordinates[0], leafCoordinates[1], leafCoordinates[2], leafCoordinates[3]);
   };
   leaf.src = 'assets/pl1/leaf.png';
 
