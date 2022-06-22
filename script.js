@@ -3,7 +3,7 @@ const canvas = document.querySelector("canvas");
 
 const resize = () => {
   canvas.width = window.innerWidth-2;
-  canvas.height = window.innerHeight-22;
+  canvas.height = window.innerHeight-44;
 }
 
 resize();
@@ -19,6 +19,12 @@ window.addEventListener('load', function () {
   var isIdle = true;
   var newLine = [] //array to store (x,y) of current line
   var newLineCol = [];
+  var ladybug1Connected = false;
+  var ladybug2Connected = false;
+  var ladybug3Connected = false;
+  var ladybug4Connected = false;
+  var ladybug5Connected = false;
+  var ladybug6Connected = false;
 
   function isTransparent(x, y) {
     //get colors
@@ -35,7 +41,19 @@ window.addEventListener('load', function () {
     return bool;
   }
 
+  function checkSvabik(x,y) {
+    if (x > svabikCoordinates[0] && y > svabikCoordinates[1] && x < svabikCoordinates[0] + svabikCoordinates[2] && y < svabikCoordinates[1] + svabikCoordinates[3]) {
+      document.getElementById('svabik').innerText = "NÁJDI ŠVÁBIKA: polož naň prštek ✅";
+    }
+  }
+
   function checkLine(line) {
+    //svabik touched
+    if (line.length == 1) {
+      checkSvabik(line[0][0],line[0][1]);
+      return;
+    }
+
     var startLine = line[0];
     var endLine = line[line.length - 1];
     var startLineTransparent = isTransparent(startLine[0], startLine[1]);
@@ -55,37 +73,71 @@ window.addEventListener('load', function () {
       }
 
       if (leaf == 1) {
-        if (
-          (endLine[0] > ladybug1Coordinates[0] && endLine[1] > ladybug1Coordinates[1] && endLine[0] < ladybug1Coordinates[0] + ladybug1Coordinates[2] && endLine[1] < ladybug1Coordinates[1] + ladybug1Coordinates[3]) ||
-          (endLine[0] > ladybug2Coordinates[0] && endLine[1] > ladybug2Coordinates[1] && endLine[0] < ladybug2Coordinates[0] + ladybug2Coordinates[2] && endLine[1] < ladybug2Coordinates[1] + ladybug2Coordinates[3]) ||
-          (endLine[0] > ladybug3Coordinates[0] && endLine[1] > ladybug3Coordinates[1] && endLine[0] < ladybug3Coordinates[0] + ladybug3Coordinates[2] && endLine[1] < ladybug3Coordinates[1] + ladybug3Coordinates[3]) ||
-          (endLine[0] > ladybug4Coordinates[0] && endLine[1] > ladybug4Coordinates[1] && endLine[0] < ladybug4Coordinates[0] + ladybug4Coordinates[2] && endLine[1] < ladybug4Coordinates[1] + ladybug4Coordinates[3]) ||
-          (endLine[0] > ladybug5Coordinates[0] && endLine[1] > ladybug5Coordinates[1] && endLine[0] < ladybug5Coordinates[0] + ladybug5Coordinates[2] && endLine[1] < ladybug5Coordinates[1] + ladybug5Coordinates[3]) ||
-          (endLine[0] > ladybug6Coordinates[0] && endLine[1] > ladybug6Coordinates[1] && endLine[0] < ladybug6Coordinates[0] + ladybug6Coordinates[2] && endLine[1] < ladybug6Coordinates[1] + ladybug6Coordinates[3])
-        ) {
+
+        if (endLine[0] > ladybug1Coordinates[0] && endLine[1] > ladybug1Coordinates[1] && endLine[0] < ladybug1Coordinates[0] + ladybug1Coordinates[2] && endLine[1] < ladybug1Coordinates[1] + ladybug1Coordinates[3]) {
+          ladybug1Connected = true;
+          console.log("inside box")
+        }
+        else if (endLine[0] > ladybug2Coordinates[0] && endLine[1] > ladybug2Coordinates[1] && endLine[0] < ladybug2Coordinates[0] + ladybug2Coordinates[2] && endLine[1] < ladybug2Coordinates[1] + ladybug2Coordinates[3]) {
+          ladybug2Connected = true;
+          console.log("inside box")
+        }
+        else if (endLine[0] > ladybug3Coordinates[0] && endLine[1] > ladybug3Coordinates[1] && endLine[0] < ladybug3Coordinates[0] + ladybug3Coordinates[2] && endLine[1] < ladybug3Coordinates[1] + ladybug3Coordinates[3]) {
+          ladybug3Connected = true;
+          console.log("inside box")
+        }
+        else if (endLine[0] > ladybug4Coordinates[0] && endLine[1] > ladybug4Coordinates[1] && endLine[0] < ladybug4Coordinates[0] + ladybug4Coordinates[2] && endLine[1] < ladybug4Coordinates[1] + ladybug4Coordinates[3]) {
+          ladybug4Connected = true;
+          console.log("inside box")
+        }
+        else if (endLine[0] > ladybug5Coordinates[0] && endLine[1] > ladybug5Coordinates[1] && endLine[0] < ladybug5Coordinates[0] + ladybug5Coordinates[2] && endLine[1] < ladybug5Coordinates[1] + ladybug5Coordinates[3]) {
+          ladybug5Connected = true;
+          console.log("inside box")
+        }
+        else if (endLine[0] > ladybug6Coordinates[0] && endLine[1] > ladybug6Coordinates[1] && endLine[0] < ladybug6Coordinates[0] + ladybug6Coordinates[2] && endLine[1] < ladybug6Coordinates[1] + ladybug6Coordinates[3]) {
+          ladybug6Connected = true;
           console.log("inside box")
         }
         else {
           endLineTransparent = true;
         }
+        
       }
 
       if (leaf == 2) {
-        if (
-          (startLine[0] > ladybug1Coordinates[0] && startLine[1] > ladybug1Coordinates[1] && startLine[0] < ladybug1Coordinates[0] + ladybug1Coordinates[2] && startLine[1] < ladybug1Coordinates[1] + ladybug1Coordinates[3]) ||
-          (startLine[0] > ladybug2Coordinates[0] && startLine[1] > ladybug2Coordinates[1] && startLine[0] < ladybug2Coordinates[0] + ladybug2Coordinates[2] && startLine[1] < ladybug2Coordinates[1] + ladybug2Coordinates[3]) ||
-          (startLine[0] > ladybug3Coordinates[0] && startLine[1] > ladybug3Coordinates[1] && startLine[0] < ladybug3Coordinates[0] + ladybug3Coordinates[2] && startLine[1] < ladybug3Coordinates[1] + ladybug3Coordinates[3]) ||
-          (startLine[0] > ladybug4Coordinates[0] && startLine[1] > ladybug4Coordinates[1] && startLine[0] < ladybug4Coordinates[0] + ladybug4Coordinates[2] && startLine[1] < ladybug4Coordinates[1] + ladybug4Coordinates[3]) ||
-          (startLine[0] > ladybug5Coordinates[0] && startLine[1] > ladybug5Coordinates[1] && startLine[0] < ladybug5Coordinates[0] + ladybug5Coordinates[2] && startLine[1] < ladybug5Coordinates[1] + ladybug5Coordinates[3]) ||
-          (startLine[0] > ladybug6Coordinates[0] && startLine[1] > ladybug6Coordinates[1] && startLine[0] < ladybug6Coordinates[0] + ladybug6Coordinates[2] && startLine[1] < ladybug6Coordinates[1] + ladybug6Coordinates[3])
-        ) {
+
+        if (startLine[0] > ladybug1Coordinates[0] && startLine[1] > ladybug1Coordinates[1] && startLine[0] < ladybug1Coordinates[0] + ladybug1Coordinates[2] && startLine[1] < ladybug1Coordinates[1] + ladybug1Coordinates[3]) {
+          ladybug1Connected = true;
+          console.log("inside box")
+        }
+        else if (startLine[0] > ladybug2Coordinates[0] && startLine[1] > ladybug2Coordinates[1] && startLine[0] < ladybug2Coordinates[0] + ladybug2Coordinates[2] && startLine[1] < ladybug2Coordinates[1] + ladybug2Coordinates[3]) {
+          ladybug2Connected = true;
+          console.log("inside box")
+        }
+        else if (startLine[0] > ladybug3Coordinates[0] && startLine[1] > ladybug3Coordinates[1] && startLine[0] < ladybug3Coordinates[0] + ladybug3Coordinates[2] && startLine[1] < ladybug3Coordinates[1] + ladybug3Coordinates[3]) {
+          ladybug3Connected = true;
+          console.log("inside box")
+        }
+        else if (startLine[0] > ladybug4Coordinates[0] && startLine[1] > ladybug4Coordinates[1] && startLine[0] < ladybug4Coordinates[0] + ladybug4Coordinates[2] && startLine[1] < ladybug4Coordinates[1] + ladybug4Coordinates[3]) {
+          ladybug4Connected = true;
+          console.log("inside box")
+        }
+        else if (startLine[0] > ladybug5Coordinates[0] && startLine[1] > ladybug5Coordinates[1] && startLine[0] < ladybug5Coordinates[0] + ladybug5Coordinates[2] && startLine[1] < ladybug5Coordinates[1] + ladybug5Coordinates[3]) {
+          ladybug5Connected = true;
+          console.log("inside box")
+        }
+        else if (startLine[0] > ladybug6Coordinates[0] && startLine[1] > ladybug6Coordinates[1] && startLine[0] < ladybug6Coordinates[0] + ladybug6Coordinates[2] && startLine[1] < ladybug6Coordinates[1] + ladybug6Coordinates[3]) {
+          ladybug6Connected = true;
           console.log("inside box")
         }
         else {
-          endLineTransparent = true;
+          startLineTransparent = true;
         }
       }
 
+      if (ladybug1Connected && ladybug2Connected && ladybug3Connected && ladybug4Connected && ladybug5Connected && ladybug6Connected) {
+        document.getElementById('spoj').innerText = "SPOJ: pre lienky nakresli cestičky k listu ✅"
+      }
       console.log(leaf);
     }
     
@@ -158,9 +210,9 @@ window.addEventListener('load', function () {
   var ladybug1Coordinates = [canvas.width*0.1, canvas.height*0.4, canvas.width*0.15, canvas.height*0.16];
   var ladybug2Coordinates = [canvas.width*0.7, canvas.height*0.2, canvas.width*0.15, canvas.height*0.16];
   var ladybug3Coordinates = [canvas.width*0.4, canvas.height*0.1, canvas.width*0.15, canvas.height*0.16];
-  var ladybug4Coordinates = [canvas.width*0.8, canvas.height*0.7, canvas.width*0.15, canvas.height*0.16];
-  var ladybug5Coordinates = [canvas.width*0.5, canvas.height*0.8, canvas.width*0.12, canvas.height*0.18];
-  var ladybug6Coordinates = [canvas.width*0.2, canvas.height*0.7, canvas.width*0.12, canvas.height*0.18];
+  var ladybug4Coordinates = [canvas.width*0.8, canvas.height*0.7, canvas.width*0.14, canvas.height*0.16];
+  var ladybug5Coordinates = [canvas.width*0.5, canvas.height*0.8, canvas.width*0.11, canvas.height*0.18];
+  var ladybug6Coordinates = [canvas.width*0.2, canvas.height*0.7, canvas.width*0.11, canvas.height*0.18];
   var svabikCoordinates = [canvas.width*0.85, canvas.height*0.45, canvas.width*0.1, canvas.height*0.17];
   var leafCoordinates = [canvas.width*0.4, canvas.height*0.4, canvas.width*0.23, canvas.height*0.23];
 
