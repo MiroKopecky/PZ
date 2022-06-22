@@ -32,7 +32,7 @@ window.addEventListener('load', function () {
     g = context.getImageData(x, y, 1, 1).data[1]; //green
     b = context.getImageData(x, y, 1, 1).data[2]; //blue
     a = context.getImageData(x, y, 1, 1).data[3]; //transparent
-    bool = a < 250; //check if transparent pixel
+    bool = a < 255; //check if transparent pixel
     //check if pixel is white
     if (r == 255 && g == 255 && b == 255) {
       bool = false;
@@ -43,7 +43,7 @@ window.addEventListener('load', function () {
 
   function checkSvabik(x,y) {
     if (x > svabikCoordinates[0] && y > svabikCoordinates[1] && x < svabikCoordinates[0] + svabikCoordinates[2] && y < svabikCoordinates[1] + svabikCoordinates[3]) {
-      document.getElementById('svabik').innerText = "NÁJDI ŠVÁBIKA: polož naň prštek ✅";
+      document.getElementById('svabik').innerText = "NÁJDI ŠVÁBIKA: klikni naň prštekom ✅";
     }
   }
 
@@ -136,7 +136,7 @@ window.addEventListener('load', function () {
       }
 
       if (ladybug1Connected && ladybug2Connected && ladybug3Connected && ladybug4Connected && ladybug5Connected && ladybug6Connected) {
-        document.getElementById('spoj').innerText = "SPOJ: pre lienky nakresli cestičky k listu ✅"
+        document.getElementById('spoj').innerText = "SPOJ: pre všetky lienky nakresli cestičku k listu ✅"
       }
       console.log(leaf);
     }
@@ -160,7 +160,8 @@ window.addEventListener('load', function () {
     g = context.getImageData(event.pageX - canvas.offsetLeft, event.pageY - canvas.offsetTop, 1, 1).data[1]; //green
     b = context.getImageData(event.pageX - canvas.offsetLeft, event.pageY - canvas.offsetTop, 1, 1).data[2]; //blue
     a = context.getImageData(event.pageX - canvas.offsetLeft, event.pageY - canvas.offsetTop, 1, 1).data[3]; //transparent
-    console.log("start",r,g,b,a)
+    console.log("start",event.pageX - canvas.offsetLeft, event.pageY - canvas.offsetTop)
+    newLine.push([event.pageX - canvas.offsetLeft, event.pageY - canvas.offsetTop]);
     isIdle = false;
   }
   function drawmove(event) {
@@ -169,7 +170,7 @@ window.addEventListener('load', function () {
     g = context.getImageData(event.pageX - canvas.offsetLeft, event.pageY - canvas.offsetTop, 1, 1).data[1]; //green
     b = context.getImageData(event.pageX - canvas.offsetLeft, event.pageY - canvas.offsetTop, 1, 1).data[2]; //blue
     a = context.getImageData(event.pageX - canvas.offsetLeft, event.pageY - canvas.offsetTop, 1, 1).data[3]; //transparent
-    console.log("move",r,g,b,a)
+    console.log("move",event.pageX - canvas.offsetLeft, event.pageY - canvas.offsetTop)
     newLineCol.push([r,g,b,a])
     context.lineTo(event.pageX - canvas.offsetLeft, event.pageY - canvas.offsetTop);
     newLine.push([event.pageX - canvas.offsetLeft, event.pageY - canvas.offsetTop]);
@@ -201,8 +202,6 @@ window.addEventListener('load', function () {
   canvas.addEventListener('touchstart', touchstart, false);
   canvas.addEventListener('touchmove', touchmove, false);
   canvas.addEventListener('touchend', touchend, false);
-
-  
 
 
   // images size

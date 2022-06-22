@@ -14,6 +14,9 @@
 
   <!-- Main CSS File -->
   <link href="style.css" rel="stylesheet">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Poppins:100,200,300,300i,400,400i,500,700,700i,800" rel="stylesheet">
   
 </head>
 
@@ -29,10 +32,24 @@
   <section id="about">
 
     <canvas id="canvas"></canvas>
-    <div style="border-top: 1px solid black">
-      <p id="svabik">NÁJDI ŠVÁBIKA: polož naň prštek 🔲</p>
-      <p id="spoj" style="text-align:right; float:left">SPOJ: pre lienky nakresli cestičky k listu 🔲</p>
-      <p style="text-align:right"><button><a href="pl1.html">REŠTART</a></button></p>
+    <!-- <div style="border-top: 1px solid black">
+      <p id="svabik" style="float:left">NÁJDI ŠVÁBIKA: polož naň prštek 🔲</p>
+      <p style="text-align:right"><button><a href="index.html">MENU</a></button></p>
+      <p id="spoj" style="text-align: left; float:left; display: flex;">SPOJ: pre lienky nakresli cestičky k listu 🔲</p>
+      <p style="text-align:right;"><button><a href="pl1.html">REŠTART</a></button></p>
+    </div> -->
+    <div class="flex-container">
+
+      <div class="flex-child left">
+        <p id="svabik">NÁJDI ŠVÁBIKA: klikni naň prštekom 🔲</p>
+        <p id="spoj">SPOJ: pre všetky lienky nakresli cestičku k listu 🔲</p>
+      </div>
+      
+      <div class="flex-child right">
+        <a href="pl1.html"><button>REŠTART</button></a>
+        <a href="index.html"><button>MENU</button></a>
+      </div>
+      
     </div>
 
   </section>
