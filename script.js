@@ -292,6 +292,14 @@ window.addEventListener('load', function () {
 
 }, false); // end window.onLoad
 
-document.addEventListener("orientationchange", function(event){
-  window.location.reload();
-});
+console.log(screen.height);
+console.log(screen.width);
+
+window.addEventListener('load', function () {
+  if (screen.height > screen.width) {
+    document.getElementById("fadeMe").style.visibility = "visible";
+  }
+  else {
+    document.getElementById("fadeMe").style.visibility = "hidden";
+  }
+})
