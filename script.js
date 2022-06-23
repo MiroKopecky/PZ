@@ -298,7 +298,11 @@ console.log(screen.width);
 window.addEventListener('load', function () {
   if (screen.height > screen.width) {
     document.getElementById("fadeMe").style.visibility = "visible";
-    document.getElementById('size').innerText = "width = " + this.screen.width + "\nheight = " + this.screen.height;
+    document.getElementById('fadeText').innerText = "Pre zobrazenie obsahu, otočte zariadenie na šírku.";
+  }
+  else if (screen.height <= screen.width && screen.height < 450) {
+    document.getElementById("fadeMe").style.visibility = "visible";
+    document.getElementById('fadeText').innerText = "Vaše zariadenie nemá dostatočne veľkú obrazovku pre zobrazenie obsahu.";
   }
   else {
     document.getElementById("fadeMe").style.visibility = "hidden";
