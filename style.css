@@ -33,6 +33,7 @@ p {
   top: 50%;
   -webkit-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
+  font-size: 120%;
 }
 
 .about-content {
@@ -56,6 +57,7 @@ canvas {
   border-top: 1px solid black;
   border-radius: 8px;
   background-color: rgb(245, 240, 240);
+  width: 100%;
 }
 
 .flex-child {

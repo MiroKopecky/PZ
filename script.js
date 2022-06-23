@@ -298,8 +298,13 @@ console.log(screen.width);
 window.addEventListener('load', function () {
   if (screen.height > screen.width) {
     document.getElementById("fadeMe").style.visibility = "visible";
+    document.getElementById('size').innerText = "width = " + this.screen.width + "\nheight = " + this.screen.height;
   }
   else {
     document.getElementById("fadeMe").style.visibility = "hidden";
   }
-})
+});
+
+window.addEventListener("orientationchange", function() {
+  window.location.reload();
+}, false);
