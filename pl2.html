@@ -5,24 +5,18 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>Venture Lab.</title>
+  <title>Pracovný zošit</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
 
   <!-- Favicons -->
-  <link href="assets/img/favicon.png" rel="icon" type="image/x-icon">
+  <link href="favicon.png" rel="icon" type="image/x-icon">
+
+  <!-- Main CSS File -->
+  <link href="assets/pl2/style.css" rel="stylesheet">
 
   <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css?family=Poppins:100,200,300,300i,400,400i,500,700,700i,800" rel="stylesheet">
-
-  <!-- Vendor CSS Files -->
-  <link href="assets/vendor/aos/aos.css" rel="stylesheet">
-  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
-
-  <!-- Main CSS File -->
-  <link href="assets/css/style.css" rel="stylesheet">
   
 </head>
 
@@ -36,28 +30,32 @@
 
   <!-- ======= About Section ======= -->
   <section id="about">
-
-    <div class="container">
-      <div class="about-content" data-aos="fade-up">
-        <h1>Vyber pracovný list:</h1>
-        <button><a href="pl1.html">Pracovný list 1 (lienky)</a></button>
-        <button><a href="pl2.html">Pracovný list 2 (kvetiny)</a></button>
-        <button><a href="pl3.html">Pracovný list 3 (slimáký)</a></button>
+    <div id="fadeMe">
+      <div class="faded">
+        <h1 id="fadeText">Pre zobrazenie obsahu, otočte zariadenie na šírku.</h1><br>
       </div>
+    </div>
+
+    <canvas id="canvas"></canvas>
+    <div class="flex-container">
+
+      <div class="flex-child left">
+        <p id="svabik">NÁJDI ŠVÁBIKA: klikni naň prštekom 🔲</p>
+        <p id="spoj">SPOJ: nakresli čiarky tak, aby kvietky vyrástli z trávičky 🔲</p>
+      </div>
+      
+      <div class="flex-child right">
+        <a href="pl2.html"><button>REŠTART</button></a>
+        <a href="index.html"><button>MENU</button></a>
+      </div>
+      
     </div>
 
   </section>
   <!-- End About Section -->
 
-  <!-- Vendor JS Files -->
-  <script src="assets/vendor/aos/aos.js"></script>
-  <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-
   <!-- Main JS File -->
-  <script src="assets/js/script.js"></script>
-
-  <!-- ParticlesJS settings -->
-  <script src="assets/js/particles.js"></script>
+  <script src="assets/pl2/script.js"></script>
 
 </body>
 
