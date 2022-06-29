@@ -14,7 +14,7 @@ window.addEventListener('load', function () {
   // get the canvas element and its context
   var canvas = document.getElementById('canvas');
   var context = canvas.getContext('2d');
-  context.strokeStyle = 'green'; //set start line color
+  context.strokeStyle = 'black'; //set start line color
   context.lineWidth = 3; //set line width
   var isIdle = true;
   var newLine = [] //array to store (x,y) of current line
@@ -22,6 +22,7 @@ window.addEventListener('load', function () {
   var flower1Connected = false;
   var flower2Connected = false;
   var flower3Connected = false;
+  var goodLines = [];
 
   function isTransparent(x, y) {
     //get colors
@@ -56,30 +57,44 @@ window.addEventListener('load', function () {
     var startLineTransparent = isTransparent(startLine[0], startLine[1]);
     var endLineTransparent = isTransparent(endLine[0], endLine[1]);
 
-    if (startLineTransparent == false && endLineTransparent == false) {
-      ground = 0;
+    //check if line is going only down or only up
+    var lineDown = true;
+    for (i = 1; i < line.length; i++) {
+      if (line[0][1] < line[1][1]) {
+        if (line[i][1] < line [i-1][1]) lineDown = false;
+      }
+      else {
+        if (line[i][1] > line [i-1][1]) lineDown = false;
+      }
+    }
+
+    if (startLineTransparent == false && endLineTransparent == false && lineDown == true) {
+      groundConnected = 0;
       if (startLine[0] > groundCoordinates[0] && startLine[1] > groundCoordinates[1] && startLine[0] < groundCoordinates[0] + groundCoordinates[2] && startLine[1] < groundCoordinates[1] + groundCoordinates[3]) {
-        ground = 1;
+        groundConnected = 1;
       }
       else if (endLine[0] > groundCoordinates[0] && endLine[1] > groundCoordinates[1] && endLine[0] < groundCoordinates[0] + groundCoordinates[2] && endLine[1] < groundCoordinates[1] + groundCoordinates[3]) {
-        ground = 2;
+        groundConnected = 2;
       }
       else {
         startLineTransparent = true;
         endLineTransparent = true;
       }
 
-      if (ground == 1) {
+      if (groundConnected == 1) {
 
         if (endLine[0] > flower1Coordinates[0] && endLine[1] > flower1Coordinates[1] && endLine[0] < flower1Coordinates[0] + flower1Coordinates[2] && endLine[1] < flower1Coordinates[1] + flower1Coordinates[3]) {
+          if (!flower1Connected) {goodLines.push(line);}
           flower1Connected = true;
           console.log("inside box")
         }
         else if (endLine[0] > flower2Coordinates[0] && endLine[1] > flower2Coordinates[1] && endLine[0] < flower2Coordinates[0] + flower2Coordinates[2] && endLine[1] < flower2Coordinates[1] + flower2Coordinates[3]) {
+          if (!flower2Connected) {goodLines.push(line);}
           flower2Connected = true;
           console.log("inside box")
         }
         else if (endLine[0] > flower3Coordinates[0] && endLine[1] > flower3Coordinates[1] && endLine[0] < flower3Coordinates[0] + flower3Coordinates[2] && endLine[1] < flower3Coordinates[1] + flower3Coordinates[3]) {
+          if (!flower3Connected) {goodLines.push(line);}
           flower3Connected = true;
           console.log("inside box")
         }
@@ -89,17 +104,20 @@ window.addEventListener('load', function () {
         
       }
 
-      if (ground == 2) {
+      if (groundConnected == 2) {
 
         if (startLine[0] > flower1Coordinates[0] && startLine[1] > flower1Coordinates[1] && startLine[0] < flower1Coordinates[0] + flower1Coordinates[2] && startLine[1] < flower1Coordinates[1] + flower1Coordinates[3]) {
+          if (!flower1Connected) {goodLines.push(line);}
           flower1Connected = true;
           console.log("inside box")
         }
         else if (startLine[0] > flower2Coordinates[0] && startLine[1] > flower2Coordinates[1] && startLine[0] < flower2Coordinates[0] + flower2Coordinates[2] && startLine[1] < flower2Coordinates[1] + flower2Coordinates[3]) {
+          if (!flower2Connected) {goodLines.push(line);}
           flower2Connected = true;
           console.log("inside box")
         }
         else if (startLine[0] > flower3Coordinates[0] && startLine[1] > flower3Coordinates[1] && startLine[0] < flower3Coordinates[0] + flower3Coordinates[2] && startLine[1] < flower3Coordinates[1] + flower3Coordinates[3]) {
+          if (!flower3Connected) {goodLines.push(line);}
           flower3Connected = true;
           console.log("inside box")
         }
@@ -110,20 +128,28 @@ window.addEventListener('load', function () {
 
       if (flower1Connected && flower2Connected && flower3Connected) {
         document.getElementById('spoj').innerText = "SPOJ: nakresli čiarky tak, aby kvietky vyrástli z trávičky ✅";
-        context.clearRect(canvas.width*0.1, canvas.height*0.4, canvas.width*0.13, canvas.height*0.16);
-        context.drawImage(flower1, flower1Coordinates[0], flower1Coordinates[1], flower1Coordinates[2], flower1Coordinates[3]);
       }
-      console.log(ground);
+      console.log(groundConnected);
     }
     
 
-    if (startLineTransparent == true || endLineTransparent == true) {
-      context.strokeStyle = 'red';
-      for (i = 0; i < line.length; i++) {
-        //context.strokeStyle = 'rgba('+ newLineCol[i][0] +','+ newLineCol[i][1] +','+ newLineCol[i][2] +','+ newLineCol[i][3] + ')';
-        context.moveTo(line[i][0], line[i][1]);
-        context.lineTo(line[i][0], line[i][1]);
-        context.stroke();
+    if (startLineTransparent == true || endLineTransparent == true || lineDown == false || flower1Connected || flower2Connected || flower3Connected) {
+      context.clearRect(0, 0, canvas.width, canvas.height);
+      context.restore();
+      context.drawImage(demo, demoCoordinates[0], demoCoordinates[1], demoCoordinates[2], demoCoordinates[3]);
+      context.drawImage(flower1, flower1Coordinates[0], flower1Coordinates[1], flower1Coordinates[2], flower1Coordinates[3]);
+      context.drawImage(flower2, flower2Coordinates[0], flower2Coordinates[1], flower2Coordinates[2], flower2Coordinates[3]);
+      context.drawImage(flower3, flower3Coordinates[0], flower3Coordinates[1], flower3Coordinates[2], flower3Coordinates[3]);
+      context.drawImage(svabik, svabikCoordinates[0], svabikCoordinates[1], svabikCoordinates[2], svabikCoordinates[3]);
+      context.drawImage(ground, groundCoordinates[0], groundCoordinates[1], groundCoordinates[2], groundCoordinates[3]);
+      for (i = 0; i < goodLines.length; i++) {
+        
+        for (j = 0; j < goodLines[i].length-1; j++) {
+          context.beginPath();
+          context.moveTo(goodLines[i][j][0], goodLines[i][j][1]);
+          context.lineTo(goodLines[i][j+1][0], goodLines[i][j+1][1]);
+          context.stroke(); 
+        }
       }
     }
   }
@@ -159,7 +185,7 @@ window.addEventListener('load', function () {
       newLine.pop(-1);
     }
     checkLine(newLine);
-    context.strokeStyle = 'green';
+    context.strokeStyle = 'black';
     newLine = [];
   }
 
@@ -185,7 +211,7 @@ window.addEventListener('load', function () {
   var flower2Coordinates = [canvas.width*0.55, canvas.height*0.1, canvas.width*0.2, canvas.height*0.3];
   var flower3Coordinates = [canvas.width*0.75, canvas.height*0.35, canvas.width*0.2, canvas.height*0.3];
   var svabikCoordinates = [canvas.width*0.1, canvas.height*0.55, canvas.width*0.08, canvas.height*0.17];
-  var groundCoordinates = [canvas.width*0.05, canvas.height*0.88, canvas.width*0.9, canvas.height*0.1];
+  var groundCoordinates = [canvas.width*0.05, canvas.height*0.94, canvas.width*0.9, canvas.height*0.03];
 
   if (canvas.height * 1.85 < canvas.width) {
     demoCoordinates = [10, 10, canvas.width*0.13, canvas.height*0.17];
@@ -236,7 +262,7 @@ window.addEventListener('load', function () {
   ground.onload = function() {
     context.drawImage(ground, groundCoordinates[0], groundCoordinates[1], groundCoordinates[2], groundCoordinates[3]);
   };
-  ground.src = 'assets/pl2/ground.png';
+  ground.src = 'assets/pl2/ground1.png';
 
 }, false); // end window.onLoad
 
