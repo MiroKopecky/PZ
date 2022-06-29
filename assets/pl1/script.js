@@ -158,34 +158,34 @@ window.addEventListener('load', function () {
 
     if (startLineTransparent == true || endLineTransparent == true) {
       // bad line dissapear
-      context.clearRect(0, 0, canvas.width, canvas.height);
-      context.restore();
-      context.drawImage(demo, demoCoordinates[0], demoCoordinates[1], demoCoordinates[2], demoCoordinates[3]);
-      context.drawImage(ladybug1, ladybug1Coordinates[0], ladybug1Coordinates[1], ladybug1Coordinates[2], ladybug1Coordinates[3]);
-      context.drawImage(ladybug2, ladybug2Coordinates[0], ladybug2Coordinates[1], ladybug2Coordinates[2], ladybug2Coordinates[3]);
-      context.drawImage(ladybug3, ladybug3Coordinates[0], ladybug3Coordinates[1], ladybug3Coordinates[2], ladybug3Coordinates[3]);
-      context.drawImage(ladybug4, ladybug4Coordinates[0], ladybug4Coordinates[1], ladybug4Coordinates[2], ladybug4Coordinates[3]);
-      context.drawImage(ladybug5, ladybug5Coordinates[0], ladybug5Coordinates[1], ladybug5Coordinates[2], ladybug5Coordinates[3]);
-      context.drawImage(ladybug6, ladybug6Coordinates[0], ladybug6Coordinates[1], ladybug6Coordinates[2], ladybug6Coordinates[3]);
-      context.drawImage(svabik, svabikCoordinates[0], svabikCoordinates[1], svabikCoordinates[2], svabikCoordinates[3]);
-      context.drawImage(leaf, leafCoordinates[0], leafCoordinates[1], leafCoordinates[2], leafCoordinates[3]);
-      for (i = 0; i < goodLines.length; i++) {
-        for (j = 0; j < goodLines[i].length-1; j++) {
-          context.beginPath();
-          context.moveTo(goodLines[i][j][0], goodLines[i][j][1]);
-          context.lineTo(goodLines[i][j+1][0], goodLines[i][j+1][1]);
-          context.stroke();
-        }
-      }
+      // context.clearRect(0, 0, canvas.width, canvas.height);
+      // context.restore();
+      // context.drawImage(demo, demoCoordinates[0], demoCoordinates[1], demoCoordinates[2], demoCoordinates[3]);
+      // context.drawImage(ladybug1, ladybug1Coordinates[0], ladybug1Coordinates[1], ladybug1Coordinates[2], ladybug1Coordinates[3]);
+      // context.drawImage(ladybug2, ladybug2Coordinates[0], ladybug2Coordinates[1], ladybug2Coordinates[2], ladybug2Coordinates[3]);
+      // context.drawImage(ladybug3, ladybug3Coordinates[0], ladybug3Coordinates[1], ladybug3Coordinates[2], ladybug3Coordinates[3]);
+      // context.drawImage(ladybug4, ladybug4Coordinates[0], ladybug4Coordinates[1], ladybug4Coordinates[2], ladybug4Coordinates[3]);
+      // context.drawImage(ladybug5, ladybug5Coordinates[0], ladybug5Coordinates[1], ladybug5Coordinates[2], ladybug5Coordinates[3]);
+      // context.drawImage(ladybug6, ladybug6Coordinates[0], ladybug6Coordinates[1], ladybug6Coordinates[2], ladybug6Coordinates[3]);
+      // context.drawImage(svabik, svabikCoordinates[0], svabikCoordinates[1], svabikCoordinates[2], svabikCoordinates[3]);
+      // context.drawImage(leaf, leafCoordinates[0], leafCoordinates[1], leafCoordinates[2], leafCoordinates[3]);
+      // for (i = 0; i < goodLines.length; i++) {
+      //   for (j = 0; j < goodLines[i].length-1; j++) {
+      //     context.beginPath();
+      //     context.moveTo(goodLines[i][j][0], goodLines[i][j][1]);
+      //     context.lineTo(goodLines[i][j+1][0], goodLines[i][j+1][1]);
+      //     context.stroke();
+      //   }
+      // }
       
       // bad line red
-      // context.strokeStyle = 'red';
-      // for (i = 0; i < line.length; i++) {
-      //   //context.strokeStyle = 'rgba('+ newLineCol[i][0] +','+ newLineCol[i][1] +','+ newLineCol[i][2] +','+ newLineCol[i][3] + ')';
-      //   context.moveTo(line[i][0], line[i][1]);
-      //   context.lineTo(line[i][0], line[i][1]);
-      //   context.stroke();
-      // }
+      context.strokeStyle = 'red';
+      for (i = 0; i < line.length; i++) {
+        //context.strokeStyle = 'rgba('+ newLineCol[i][0] +','+ newLineCol[i][1] +','+ newLineCol[i][2] +','+ newLineCol[i][3] + ')';
+        context.moveTo(line[i][0], line[i][1]);
+        context.lineTo(line[i][0], line[i][1]);
+        context.stroke();
+      }
     }
   }
 
@@ -202,6 +202,7 @@ window.addEventListener('load', function () {
   }
   function drawmove(event) {
     if (isIdle) return;
+    
     r = context.getImageData(event.pageX - canvas.offsetLeft, event.pageY - canvas.offsetTop, 1, 1).data[0]; //red
     g = context.getImageData(event.pageX - canvas.offsetLeft, event.pageY - canvas.offsetTop, 1, 1).data[1]; //green
     b = context.getImageData(event.pageX - canvas.offsetLeft, event.pageY - canvas.offsetTop, 1, 1).data[2]; //blue
