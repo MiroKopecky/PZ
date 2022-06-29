@@ -14,6 +14,7 @@ window.addEventListener('load', function () {
   // get the canvas element and its context
   var canvas = document.getElementById('canvas');
   var context = canvas.getContext('2d');
+  context.translate(1, 1);
   context.strokeStyle = 'green'; //set start line color
   context.lineWidth = 3; //set line width
   var isIdle = true;
@@ -25,6 +26,7 @@ window.addEventListener('load', function () {
   var ladybug4Connected = false;
   var ladybug5Connected = false;
   var ladybug6Connected = false;
+  var goodLines = [];
 
   function isTransparent(x, y) {
     //get colors
@@ -60,41 +62,47 @@ window.addEventListener('load', function () {
     var endLineTransparent = isTransparent(endLine[0], endLine[1]);
 
     if (startLineTransparent == false && endLineTransparent == false) {
-      leaf = 0;
+      leafConnected = 0;
       if (startLine[0] > leafCoordinates[0] && startLine[1] > leafCoordinates[1] && startLine[0] < leafCoordinates[0] + leafCoordinates[2] && startLine[1] < leafCoordinates[1] + leafCoordinates[3]) {
-        leaf = 1;
+        leafConnected = 1;
       }
       else if (endLine[0] > leafCoordinates[0] && endLine[1] > leafCoordinates[1] && endLine[0] < leafCoordinates[0] + leafCoordinates[2] && endLine[1] < leafCoordinates[1] + leafCoordinates[3]) {
-        leaf = 2;
+        leafConnected = 2;
       }
       else {
         startLineTransparent = true;
         endLineTransparent = true;
       }
 
-      if (leaf == 1) {
+      if (leafConnected == 1) {
 
         if (endLine[0] > ladybug1Coordinates[0] && endLine[1] > ladybug1Coordinates[1] && endLine[0] < ladybug1Coordinates[0] + ladybug1Coordinates[2] && endLine[1] < ladybug1Coordinates[1] + ladybug1Coordinates[3]) {
+          goodLines.push(line);
           ladybug1Connected = true;
           console.log("inside box")
         }
         else if (endLine[0] > ladybug2Coordinates[0] && endLine[1] > ladybug2Coordinates[1] && endLine[0] < ladybug2Coordinates[0] + ladybug2Coordinates[2] && endLine[1] < ladybug2Coordinates[1] + ladybug2Coordinates[3]) {
+          goodLines.push(line);
           ladybug2Connected = true;
           console.log("inside box")
         }
         else if (endLine[0] > ladybug3Coordinates[0] && endLine[1] > ladybug3Coordinates[1] && endLine[0] < ladybug3Coordinates[0] + ladybug3Coordinates[2] && endLine[1] < ladybug3Coordinates[1] + ladybug3Coordinates[3]) {
+          goodLines.push(line);
           ladybug3Connected = true;
           console.log("inside box")
         }
         else if (endLine[0] > ladybug4Coordinates[0] && endLine[1] > ladybug4Coordinates[1] && endLine[0] < ladybug4Coordinates[0] + ladybug4Coordinates[2] && endLine[1] < ladybug4Coordinates[1] + ladybug4Coordinates[3]) {
+          goodLines.push(line);
           ladybug4Connected = true;
           console.log("inside box")
         }
         else if (endLine[0] > ladybug5Coordinates[0] && endLine[1] > ladybug5Coordinates[1] && endLine[0] < ladybug5Coordinates[0] + ladybug5Coordinates[2] && endLine[1] < ladybug5Coordinates[1] + ladybug5Coordinates[3]) {
+          goodLines.push(line);
           ladybug5Connected = true;
           console.log("inside box")
         }
         else if (endLine[0] > ladybug6Coordinates[0] && endLine[1] > ladybug6Coordinates[1] && endLine[0] < ladybug6Coordinates[0] + ladybug6Coordinates[2] && endLine[1] < ladybug6Coordinates[1] + ladybug6Coordinates[3]) {
+          goodLines.push(line);
           ladybug6Connected = true;
           console.log("inside box")
         }
@@ -104,29 +112,35 @@ window.addEventListener('load', function () {
         
       }
 
-      if (leaf == 2) {
+      if (leafConnected == 2) {
 
         if (startLine[0] > ladybug1Coordinates[0] && startLine[1] > ladybug1Coordinates[1] && startLine[0] < ladybug1Coordinates[0] + ladybug1Coordinates[2] && startLine[1] < ladybug1Coordinates[1] + ladybug1Coordinates[3]) {
+          goodLines.push(line);
           ladybug1Connected = true;
           console.log("inside box")
         }
         else if (startLine[0] > ladybug2Coordinates[0] && startLine[1] > ladybug2Coordinates[1] && startLine[0] < ladybug2Coordinates[0] + ladybug2Coordinates[2] && startLine[1] < ladybug2Coordinates[1] + ladybug2Coordinates[3]) {
+          goodLines.push(line);
           ladybug2Connected = true;
           console.log("inside box")
         }
         else if (startLine[0] > ladybug3Coordinates[0] && startLine[1] > ladybug3Coordinates[1] && startLine[0] < ladybug3Coordinates[0] + ladybug3Coordinates[2] && startLine[1] < ladybug3Coordinates[1] + ladybug3Coordinates[3]) {
+          goodLines.push(line);
           ladybug3Connected = true;
           console.log("inside box")
         }
         else if (startLine[0] > ladybug4Coordinates[0] && startLine[1] > ladybug4Coordinates[1] && startLine[0] < ladybug4Coordinates[0] + ladybug4Coordinates[2] && startLine[1] < ladybug4Coordinates[1] + ladybug4Coordinates[3]) {
+          goodLines.push(line);
           ladybug4Connected = true;
           console.log("inside box")
         }
         else if (startLine[0] > ladybug5Coordinates[0] && startLine[1] > ladybug5Coordinates[1] && startLine[0] < ladybug5Coordinates[0] + ladybug5Coordinates[2] && startLine[1] < ladybug5Coordinates[1] + ladybug5Coordinates[3]) {
+          goodLines.push(line);
           ladybug5Connected = true;
           console.log("inside box")
         }
         else if (startLine[0] > ladybug6Coordinates[0] && startLine[1] > ladybug6Coordinates[1] && startLine[0] < ladybug6Coordinates[0] + ladybug6Coordinates[2] && startLine[1] < ladybug6Coordinates[1] + ladybug6Coordinates[3]) {
+          goodLines.push(line);
           ladybug6Connected = true;
           console.log("inside box")
         }
@@ -143,13 +157,35 @@ window.addEventListener('load', function () {
     
 
     if (startLineTransparent == true || endLineTransparent == true) {
-      context.strokeStyle = 'red';
-      for (i = 0; i < line.length; i++) {
-        //context.strokeStyle = 'rgba('+ newLineCol[i][0] +','+ newLineCol[i][1] +','+ newLineCol[i][2] +','+ newLineCol[i][3] + ')';
-        context.moveTo(line[i][0], line[i][1]);
-        context.lineTo(line[i][0], line[i][1]);
-        context.stroke();
+      // bad line dissapear
+      context.clearRect(0, 0, canvas.width, canvas.height);
+      context.restore();
+      context.drawImage(demo, demoCoordinates[0], demoCoordinates[1], demoCoordinates[2], demoCoordinates[3]);
+      context.drawImage(ladybug1, ladybug1Coordinates[0], ladybug1Coordinates[1], ladybug1Coordinates[2], ladybug1Coordinates[3]);
+      context.drawImage(ladybug2, ladybug2Coordinates[0], ladybug2Coordinates[1], ladybug2Coordinates[2], ladybug2Coordinates[3]);
+      context.drawImage(ladybug3, ladybug3Coordinates[0], ladybug3Coordinates[1], ladybug3Coordinates[2], ladybug3Coordinates[3]);
+      context.drawImage(ladybug4, ladybug4Coordinates[0], ladybug4Coordinates[1], ladybug4Coordinates[2], ladybug4Coordinates[3]);
+      context.drawImage(ladybug5, ladybug5Coordinates[0], ladybug5Coordinates[1], ladybug5Coordinates[2], ladybug5Coordinates[3]);
+      context.drawImage(ladybug6, ladybug6Coordinates[0], ladybug6Coordinates[1], ladybug6Coordinates[2], ladybug6Coordinates[3]);
+      context.drawImage(svabik, svabikCoordinates[0], svabikCoordinates[1], svabikCoordinates[2], svabikCoordinates[3]);
+      context.drawImage(leaf, leafCoordinates[0], leafCoordinates[1], leafCoordinates[2], leafCoordinates[3]);
+      for (i = 0; i < goodLines.length; i++) {
+        for (j = 0; j < goodLines[i].length-1; j++) {
+          context.beginPath();
+          context.moveTo(goodLines[i][j][0], goodLines[i][j][1]);
+          context.lineTo(goodLines[i][j+1][0], goodLines[i][j+1][1]);
+          context.stroke();
+        }
       }
+      
+      // bad line red
+      // context.strokeStyle = 'red';
+      // for (i = 0; i < line.length; i++) {
+      //   //context.strokeStyle = 'rgba('+ newLineCol[i][0] +','+ newLineCol[i][1] +','+ newLineCol[i][2] +','+ newLineCol[i][3] + ')';
+      //   context.moveTo(line[i][0], line[i][1]);
+      //   context.lineTo(line[i][0], line[i][1]);
+      //   context.stroke();
+      // }
     }
   }
 
@@ -217,14 +253,14 @@ window.addEventListener('load', function () {
 
   if (canvas.height * 1.85 < canvas.width) {
     demoCoordinates = [10, 10, canvas.width*0.12, canvas.height*0.17];
-    ladybug1Coordinates = [canvas.width*0.1, canvas.height*0.4, canvas.width*0.07, canvas.height*0.16];
-    ladybug2Coordinates = [canvas.width*0.7, canvas.height*0.2, canvas.width*0.07, canvas.height*0.16];
-    ladybug3Coordinates = [canvas.width*0.4, canvas.height*0.1, canvas.width*0.07, canvas.height*0.16];
-    ladybug4Coordinates = [canvas.width*0.8, canvas.height*0.7, canvas.width*0.05, canvas.height*0.16];
-    ladybug5Coordinates = [canvas.width*0.5, canvas.height*0.8, canvas.width*0.04, canvas.height*0.18];
-    ladybug6Coordinates = [canvas.width*0.2, canvas.height*0.7, canvas.width*0.04, canvas.height*0.18];
-    svabikCoordinates = [canvas.width*0.85, canvas.height*0.45, canvas.width*0.04, canvas.height*0.17];
-    leafCoordinates = [canvas.width*0.4, canvas.height*0.4, canvas.width*0.15, canvas.height*0.23];
+    ladybug1Coordinates = [canvas.width*0.1, canvas.height*0.4, canvas.width*0.12, canvas.height*0.2];
+    ladybug2Coordinates = [canvas.width*0.7, canvas.height*0.2, canvas.width*0.12, canvas.height*0.2];
+    ladybug3Coordinates = [canvas.width*0.4, canvas.height*0.1, canvas.width*0.12, canvas.height*0.2];
+    ladybug4Coordinates = [canvas.width*0.8, canvas.height*0.7, canvas.width*0.12, canvas.height*0.2];
+    ladybug5Coordinates = [canvas.width*0.5, canvas.height*0.75, canvas.width*0.11, canvas.height*0.22];
+    ladybug6Coordinates = [canvas.width*0.2, canvas.height*0.7, canvas.width*0.11, canvas.height*0.23];
+    svabikCoordinates = [canvas.width*0.85, canvas.height*0.45, canvas.width*0.08, canvas.height*0.21];
+    leafCoordinates = [canvas.width*0.4, canvas.height*0.4, canvas.width*0.16, canvas.height*0.23];
   }
 
   // demo img

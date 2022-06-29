@@ -142,13 +142,12 @@ window.addEventListener('load', function () {
       context.drawImage(flower3, flower3Coordinates[0], flower3Coordinates[1], flower3Coordinates[2], flower3Coordinates[3]);
       context.drawImage(svabik, svabikCoordinates[0], svabikCoordinates[1], svabikCoordinates[2], svabikCoordinates[3]);
       context.drawImage(ground, groundCoordinates[0], groundCoordinates[1], groundCoordinates[2], groundCoordinates[3]);
-      for (i = 0; i < goodLines.length; i++) {
-        
+      for (i = 0; i < goodLines.length; i++) { 
         for (j = 0; j < goodLines[i].length-1; j++) {
           context.beginPath();
           context.moveTo(goodLines[i][j][0], goodLines[i][j][1]);
           context.lineTo(goodLines[i][j+1][0], goodLines[i][j+1][1]);
-          context.stroke(); 
+          context.stroke();
         }
       }
     }
@@ -225,7 +224,9 @@ window.addEventListener('load', function () {
   // demo img
   var demo = new Image();
   demo.onload = function() {
+    context.beginPath();
     context.drawImage(demo, demoCoordinates[0], demoCoordinates[1], demoCoordinates[2], demoCoordinates[3]);
+    context.stroke();
   };
   demo.src = 'assets/pl2/demo.png';
   
