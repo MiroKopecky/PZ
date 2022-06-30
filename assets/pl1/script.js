@@ -27,6 +27,8 @@ window.addEventListener('load', function () {
   var ladybug5Connected = false;
   var ladybug6Connected = false;
   var goodLines = [];
+  var startLineTransparent = true;
+  var endLineTransparent = true;
 
   function isTransparent(x, y) {
     //get colors
@@ -58,8 +60,6 @@ window.addEventListener('load', function () {
 
     var startLine = line[0];
     var endLine = line[line.length - 1];
-    var startLineTransparent = isTransparent(startLine[0], startLine[1]);
-    var endLineTransparent = isTransparent(endLine[0], endLine[1]);
 
     if (startLineTransparent == false && endLineTransparent == false) {
       leafConnected = 0;
@@ -197,7 +197,8 @@ window.addEventListener('load', function () {
     g = context.getImageData(event.pageX - canvas.offsetLeft, event.pageY - canvas.offsetTop, 1, 1).data[1]; //green
     b = context.getImageData(event.pageX - canvas.offsetLeft, event.pageY - canvas.offsetTop, 1, 1).data[2]; //blue
     a = context.getImageData(event.pageX - canvas.offsetLeft, event.pageY - canvas.offsetTop, 1, 1).data[3]; //transparent
-    console.log("start",event.pageX - canvas.offsetLeft, event.pageY - canvas.offsetTop)
+    startLineTransparent = a < 255;
+    console.log("start",event.pageX - canvas.offsetLeft, event.pageY - canvas.offsetTop, a)
     newLine.push([event.pageX - canvas.offsetLeft, event.pageY - canvas.offsetTop]);
     isIdle = false;
   }
@@ -208,7 +209,7 @@ window.addEventListener('load', function () {
     g = context.getImageData(event.pageX - canvas.offsetLeft, event.pageY - canvas.offsetTop, 1, 1).data[1]; //green
     b = context.getImageData(event.pageX - canvas.offsetLeft, event.pageY - canvas.offsetTop, 1, 1).data[2]; //blue
     a = context.getImageData(event.pageX - canvas.offsetLeft, event.pageY - canvas.offsetTop, 1, 1).data[3]; //transparent
-    console.log("move",event.pageX - canvas.offsetLeft, event.pageY - canvas.offsetTop)
+    console.log("move",event.pageX - canvas.offsetLeft, event.pageY - canvas.offsetTop, a)
     newLineCol.push([r,g,b,a])
     context.lineTo(event.pageX - canvas.offsetLeft, event.pageY - canvas.offsetTop);
     newLine.push([event.pageX - canvas.offsetLeft, event.pageY - canvas.offsetTop]);
@@ -221,6 +222,11 @@ window.addEventListener('load', function () {
     if (newLine.length > 1) {
       newLine.pop(-1);
     }
+    r = context.getImageData(event.pageX - canvas.offsetLeft, event.pageY - canvas.offsetTop, 1, 1).data[0]; //red
+    g = context.getImageData(event.pageX - canvas.offsetLeft, event.pageY - canvas.offsetTop, 1, 1).data[1]; //green
+    b = context.getImageData(event.pageX - canvas.offsetLeft, event.pageY - canvas.offsetTop, 1, 1).data[2]; //blue
+    a = context.getImageData(event.pageX - canvas.offsetLeft, event.pageY - canvas.offsetTop, 1, 1).data[3]; //transparent
+    endLineTransparent = a < 255;
     checkLine(newLine);
     context.strokeStyle = 'green';
     newLine = [];
