@@ -24,24 +24,6 @@ window.addEventListener('load', function () {
   var flower3Connected = false;
   var goodLines = [];
 
-  function tmp () {
-    context.clearRect(0, 0, canvas.width, canvas.height);
-    context.restore();
-    context.drawImage(demo, demoCoordinates[0], demoCoordinates[1], demoCoordinates[2], demoCoordinates[3]);
-    context.drawImage(flower1, flower1Coordinates[0], flower1Coordinates[1], flower1Coordinates[2], flower1Coordinates[3]);
-    context.drawImage(flower2, flower2Coordinates[0], flower2Coordinates[1], flower2Coordinates[2], flower2Coordinates[3]);
-    context.drawImage(flower3, flower3Coordinates[0], flower3Coordinates[1], flower3Coordinates[2], flower3Coordinates[3]);
-    context.drawImage(svabik, svabikCoordinates[0], svabikCoordinates[1], svabikCoordinates[2], svabikCoordinates[3]);
-    context.drawImage(ground, groundCoordinates[0], groundCoordinates[1], groundCoordinates[2], groundCoordinates[3]);
-    temp = [[1,1],[2,2],[3,3],[4,4],[5,5],[6,6],[7,7],[8,8],[9,9],[1,2],[2,3],[3,4],[4,1],[5,2],[6,3],[7,4],[8,1],[9,2],[0,3],[3,4]];
-    for (j = 0; j < temp.length-1; j++) {
-      context.beginPath();
-      context.moveTo(temp[j][0], temp[j][1]);
-      context.lineTo(temp[j+1][0], temp[j+1][1]);
-      context.stroke();
-    }
-  }
-
   function isTransparent(x, y) {
     //get colors
     r = context.getImageData(x, y, 1, 1).data[0]; //red
@@ -83,6 +65,13 @@ window.addEventListener('load', function () {
       }
       else {
         if (line[i][1] > line [i-1][1]) lineDown = false;
+      }
+    }
+
+    //check if line is not horizontal
+    for (i = 10; i < line.length; i++) {
+      if (Math.abs(line[i][0] - line[i-10][0]) > 25) {
+        lineDown = false;
       }
     }
 
@@ -236,7 +225,7 @@ window.addEventListener('load', function () {
     flower2Coordinates = [canvas.width*0.55, canvas.height*0.1, canvas.width*0.15, canvas.height*0.3];
     flower3Coordinates = [canvas.width*0.75, canvas.height*0.35, canvas.width*0.15, canvas.height*0.3];
     svabikCoordinates = [canvas.width*0.1, canvas.height*0.55, canvas.width*0.08, canvas.height*0.17];
-    groundCoordinates = [canvas.width*0.05, canvas.height*0.88, canvas.width*0.9, canvas.height*0.1];
+    groundCoordinates = [canvas.width*0.05, canvas.height*0.94, canvas.width*0.9, canvas.height*0.03];
   }
 
   // demo img

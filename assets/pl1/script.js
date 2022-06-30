@@ -153,6 +153,7 @@ window.addEventListener('load', function () {
         document.getElementById('spoj').innerText = "SPOJ: pre všetky lienky nakresli cestičku k listu ✅"
       }
       console.log(leaf);
+      checkLine([[1,1],[2,2]]); //blur lines on all images
     }
     
 
@@ -258,8 +259,8 @@ window.addEventListener('load', function () {
     ladybug2Coordinates = [canvas.width*0.7, canvas.height*0.2, canvas.width*0.12, canvas.height*0.2];
     ladybug3Coordinates = [canvas.width*0.4, canvas.height*0.1, canvas.width*0.12, canvas.height*0.2];
     ladybug4Coordinates = [canvas.width*0.8, canvas.height*0.7, canvas.width*0.12, canvas.height*0.2];
-    ladybug5Coordinates = [canvas.width*0.5, canvas.height*0.75, canvas.width*0.11, canvas.height*0.22];
-    ladybug6Coordinates = [canvas.width*0.2, canvas.height*0.7, canvas.width*0.11, canvas.height*0.23];
+    ladybug5Coordinates = [canvas.width*0.5, canvas.height*0.75, canvas.width*0.1, canvas.height*0.22];
+    ladybug6Coordinates = [canvas.width*0.2, canvas.height*0.7, canvas.width*0.1, canvas.height*0.23];
     svabikCoordinates = [canvas.width*0.85, canvas.height*0.45, canvas.width*0.08, canvas.height*0.21];
     leafCoordinates = [canvas.width*0.4, canvas.height*0.4, canvas.width*0.16, canvas.height*0.23];
   }
