@@ -49,7 +49,6 @@ window.addEventListener('load', function () {
     //svabik touched
     if (line.length == 1) {
       checkSvabik(line[0][0],line[0][1]);
-      return;
     }
 
     var startLine = line[0];
