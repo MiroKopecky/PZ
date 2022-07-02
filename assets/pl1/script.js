@@ -59,6 +59,7 @@ window.addEventListener('load', function () {
 
     var startLine = line[0];
     var endLine = line[line.length - 1];
+    var temp = isTransparent(startLine[0],startLine[1]);
 
     if (startLineTransparent == false && endLineTransparent == false) {
       leafConnected = 0;
@@ -152,7 +153,6 @@ window.addEventListener('load', function () {
         document.getElementById('spoj').innerText = "SPOJ: pre všetky lienky nakresli cestičku k listu ✅"
       }
       console.log(leaf);
-      checkLine([[1,1],[2,2]]); //blur lines on all images
     }
     
 
@@ -334,7 +334,7 @@ window.addEventListener('load', function () {
   };
   leaf.src = 'assets/pl1/leaf.png';
 
-}, false); // end window.onLoad
+}, true); // end window.onLoad
 
 console.log(screen.height);
 console.log(screen.width);
