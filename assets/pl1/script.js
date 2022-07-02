@@ -30,7 +30,7 @@ window.addEventListener('load', function () {
   var startLineTransparent = true;
   var endLineTransparent = true;
 
-  function isTransparent(x, y) {
+  function isTemp(x, y) {
     //get colors
     r = context.getImageData(x, y, 1, 1).data[0]; //red
     g = context.getImageData(x, y, 1, 1).data[1]; //green
@@ -41,7 +41,19 @@ window.addEventListener('load', function () {
     if (r == 255 && g == 255 && b == 255) {
       bool = false;
     }
-    console.log(r,g,b,a,bool)
+    return bool;
+  }
+
+  function isTransparent(line) {
+    //get colors
+    r = line[2]; //red
+    g = line[3]; //green
+    b = line[4]; //blue
+    a = line[5]; //transparent
+    bool = a < 255; //check if transparent pixel
+    //check if pixel is green
+    bool = (r == 0 && g == 128 && b == 0) || (r == 0 && g == 0 && b == 0 && a < 240);
+    console.log(r,g,b,a,bool);
     return bool;
   }
 
@@ -53,13 +65,15 @@ window.addEventListener('load', function () {
 
   function checkLine(line) {
     //svabik touched
-    if (line.length == 1) {
+    if (line.length == 2) {
       checkSvabik(line[0][0],line[0][1]);
     }
 
     var startLine = line[0];
     var endLine = line[line.length - 1];
-    var temp = isTransparent(startLine[0],startLine[1]);
+    var startLineTransparent = isTransparent(startLine);
+    var endLineTransparent = isTransparent(line[line.length - 2]);
+    var tmp = isTemp(250,250); // IDK why needed but blur doesnt work without it
 
     if (startLineTransparent == false && endLineTransparent == false) {
       leafConnected = 0;
@@ -152,8 +166,7 @@ window.addEventListener('load', function () {
       if (ladybug1Connected && ladybug2Connected && ladybug3Connected && ladybug4Connected && ladybug5Connected && ladybug6Connected) {
         document.getElementById('spoj').innerText = "SPOJ: pre všetky lienky nakresli cestičku k listu ✅"
       }
-      console.log(leaf);
-      checkLine([[1,1],[2,2]]); //blur lines on all images
+      checkLine([[1,1,0,128,0,0],[2,2,0,128,0,0]]); //blur lines on all images
     }
     
 
@@ -197,36 +210,36 @@ window.addEventListener('load', function () {
     g = context.getImageData(event.pageX - canvas.offsetLeft, event.pageY - canvas.offsetTop, 1, 1).data[1]; //green
     b = context.getImageData(event.pageX - canvas.offsetLeft, event.pageY - canvas.offsetTop, 1, 1).data[2]; //blue
     a = context.getImageData(event.pageX - canvas.offsetLeft, event.pageY - canvas.offsetTop, 1, 1).data[3]; //transparent
-    startLineTransparent = a < 255;
-    console.log("start",event.pageX - canvas.offsetLeft, event.pageY - canvas.offsetTop, a)
-    newLine.push([event.pageX - canvas.offsetLeft, event.pageY - canvas.offsetTop]);
+    // startLineTransparent = a < 255;
+    console.log("start",event.pageX - canvas.offsetLeft, event.pageY - canvas.offsetTop, r,g,b,a)
+    newLine.push([event.pageX - canvas.offsetLeft, event.pageY - canvas.offsetTop,r,g,b,a]);
     isIdle = false;
   }
   function drawmove(event) {
     if (isIdle) return;
-    
     r = context.getImageData(event.pageX - canvas.offsetLeft, event.pageY - canvas.offsetTop, 1, 1).data[0]; //red
     g = context.getImageData(event.pageX - canvas.offsetLeft, event.pageY - canvas.offsetTop, 1, 1).data[1]; //green
     b = context.getImageData(event.pageX - canvas.offsetLeft, event.pageY - canvas.offsetTop, 1, 1).data[2]; //blue
     a = context.getImageData(event.pageX - canvas.offsetLeft, event.pageY - canvas.offsetTop, 1, 1).data[3]; //transparent
-    console.log("move",event.pageX - canvas.offsetLeft, event.pageY - canvas.offsetTop, a)
-    newLineCol.push([r,g,b,a])
+    //console.log("move",event.pageX - canvas.offsetLeft, event.pageY - canvas.offsetTop, a)
     context.lineTo(event.pageX - canvas.offsetLeft, event.pageY - canvas.offsetTop);
-    newLine.push([event.pageX - canvas.offsetLeft, event.pageY - canvas.offsetTop]);
+    newLine.push([event.pageX - canvas.offsetLeft, event.pageY - canvas.offsetTop,r,g,b,a]);
     context.stroke();
   }
   function drawend(event) {
     if (isIdle) return;
     drawmove(event);
     isIdle = true;
-    if (newLine.length > 1) {
-      newLine.pop(-1);
-    }
-    r = context.getImageData(event.pageX - canvas.offsetLeft, event.pageY - canvas.offsetTop, 1, 1).data[0]; //red
-    g = context.getImageData(event.pageX - canvas.offsetLeft, event.pageY - canvas.offsetTop, 1, 1).data[1]; //green
-    b = context.getImageData(event.pageX - canvas.offsetLeft, event.pageY - canvas.offsetTop, 1, 1).data[2]; //blue
-    a = context.getImageData(event.pageX - canvas.offsetLeft, event.pageY - canvas.offsetTop, 1, 1).data[3]; //transparent
-    endLineTransparent = a < 255;
+    // if (newLine.length > 1) {
+    //   newLine.pop(-1);
+    // }
+    // r = context.getImageData(event.pageX - canvas.offsetLeft, event.pageY - canvas.offsetTop, 1, 1).data[0]; //red
+    // g = context.getImageData(event.pageX - canvas.offsetLeft, event.pageY - canvas.offsetTop, 1, 1).data[1]; //green
+    // b = context.getImageData(event.pageX - canvas.offsetLeft, event.pageY - canvas.offsetTop, 1, 1).data[2]; //blue
+    // a = context.getImageData(event.pageX - canvas.offsetLeft, event.pageY - canvas.offsetTop, 1, 1).data[3]; //transparent
+    // console.log("end",event.pageX - canvas.offsetLeft, event.pageY - canvas.offsetTop, r,g,b,a)
+    // endLineTransparent = a < 255;
+    // endLineTransparent = (r == 0 && g == 128 && b == 0)
     checkLine(newLine);
     context.strokeStyle = 'green';
     newLine = [];
@@ -331,7 +344,7 @@ window.addEventListener('load', function () {
   var leaf = new Image();
   leaf.onload = function() {
     context.drawImage(leaf, leafCoordinates[0], leafCoordinates[1], leafCoordinates[2], leafCoordinates[3]);
-    checkLine([[1,1],[2,2]]); //blur lines on all images
+    checkLine([[1,1,0,128,0,0],[2,2,0,128,0,0]]); //blur lines on all images
   };
   leaf.src = 'assets/pl1/leaf.png';
 
