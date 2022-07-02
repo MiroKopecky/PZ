@@ -153,6 +153,7 @@ window.addEventListener('load', function () {
         document.getElementById('spoj').innerText = "SPOJ: pre všetky lienky nakresli cestičku k listu ✅"
       }
       console.log(leaf);
+      checkLine([[1,1],[2,2]]); //blur lines on all images
     }
     
 
